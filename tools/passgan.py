@@ -1,7 +1,6 @@
 import random
-import sys
 import os
-import time
+import urllib.request
 
 try:
     from colorama import Fore, init
@@ -87,10 +86,6 @@ def banner():
                                              
       {Fore.WHITE}AI-Powered Password Generator (Markov Chain)
     """)
-
-import urllib.request
-import gzip
-import shutil
 
 def download_rockyou():
     print(f"\n{Fore.YELLOW}[*] Downloading rockyou.txt (this may take a while)...")
