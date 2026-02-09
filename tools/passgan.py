@@ -88,6 +88,22 @@ def banner():
       {Fore.WHITE}AI-Powered Password Generator (Markov Chain)
     """)
 
+import urllib.request
+import gzip
+import shutil
+
+def download_rockyou():
+    print(f"\n{Fore.YELLOW}[*] Downloading rockyou.txt (this may take a while)...")
+    url = "https://github.com/brannondorsey/PassGAN/releases/download/data/rockyou-train.txt"
+    try:
+        # Download
+        urllib.request.urlretrieve(url, "tools/rockyou.txt")
+        print(f"{Fore.GREEN}[+] Download complete: tools/rockyou.txt")
+        return "tools/rockyou.txt"
+    except Exception as e:
+        print(f"{Fore.RED}[!] Download failed: {e}")
+        return None
+
 def main():
     banner()
     
@@ -100,6 +116,12 @@ def main():
     
     if choice == '2':
         path = input(f"{Fore.YELLOW}Enter path to wordlist (e.g., rockyou.txt): ").strip('"')
+        
+        if not os.path.exists(path) and "rockyou" in path.lower():
+            dl_choice = input(f"{Fore.YELLOW}[?] rockyou.txt not found. Download it? (y/n): ").lower()
+            if dl_choice == 'y':
+                path = download_rockyou() or path
+
         if os.path.exists(path):
             try:
                 with open(path, 'r', encoding='latin-1') as f:
