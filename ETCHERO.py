@@ -35,7 +35,7 @@ if BRAND not in "by ABDULHAMEED AMIN":
     sys.exit("🚫 Branding removed. Tool crashed.")
 
 def banner():
-    os.system('clear')
+    os.system('cls' if os.name == 'nt' else 'clear')
     print("""\033[1;32m
 ███████╗████████╗░█████╗░██╗░░██╗███████╗██████╗░░█████╗░
 ██╔════╝╚══██╔══╝██╔══██╗██║░░██║██╔════╝██╔══██╗██╔══██╗
@@ -72,6 +72,7 @@ def menu():
 [21] WiFi Password Grabber
 [22] Image Metadata Extractor
 [23] Hash Generator & Identifier
+[24] PassGAN (AI Password Gen)
 [0] Exit
 """)
 
@@ -103,7 +104,8 @@ def run_tool(choice):
                 "geoip_locator",
                 "wifi_password_grabber",
                 "image_metadata_extractor",
-                "hash_tool"
+                "hash_tool",
+                "passgan"
             ], 1)
         }
         os.system(tool_map[choice])
